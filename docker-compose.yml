@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+    app:
+        image: node:alpine
+        working_dir: /app
+        environment:
+            VIRTUAL_HOST: kronos.hgen.slu.se
+            VIRTUAL_PORT: 3000
+            LETSENCRYPT_HOST: kronos.hgen.slu.se
+            LETSENCRYPT_EMAIL: hadrien.gourle@slu.se
+        expose:
+            - 3000
+        build: .
+        command: npm run serve
+
+networks:
+  default:
+    external:
+        name: nginx-proxy
